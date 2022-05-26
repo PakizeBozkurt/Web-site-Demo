@@ -1,46 +1,35 @@
-var names, item;
+var Albums;
 
-function getNumberOrString(value) {
-  // Convert a string value to a number if possible
-  let number_value = Number(value);
-  if (Number.isNaN(number_value)) {
-    return value
-  } else {
-    return number_value
+// Describe this function...
+function setArrayValues() {
+  if(--window.LoopTrap <= 0) throw "Infinite loop.";
+  Albums = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOT-U8VxGxjtCpMayukEJ67r4DonXd0Praxj-KfOgJZE_6NtE5sYF7EVDZFe-F1pGXKto&usqp=CAU', 'https://i.ibb.co/8xfJtPg/purpleus.jpg', 'https://i.ibb.co/Y32qBHp/parkday.jpg"', 'https://i.ibb.co/qnJ7B37/trainus.jpg', 'https://i.ibb.co/NNCHGMN/michealandme.jpg', 'https://i.ibb.co/4fCXWLs/menuuandme.jpg', 'https://i.ibb.co/8xh28wg/leicester.jpg', 'https://i.ibb.co/G07vysY/emmaandme.jpg', 'https://i.ibb.co/xJxPbVV/bookday.jpg', 'https://i.ibb.co/Bwq3Vpg/francesandme.jpg'];
+}
+
+
+setArrayValues();
+let element_title = document.getElementById('title');
+element_title.style.color = '#cc0000';
+let element_album = document.getElementById('album');
+element_album.innerText = Albums[0];
+
+
+document.getElementById('next').addEventListener('click', (event) => {
+  let element_album2 = document.getElementById('album');
+  element_album2.setAttribute("src", Albums[0]);
+  Albums.push(Albums.shift());
+  if (!Albums.length) {
+    setArrayValues();
   }
-}
-
-function randomInt(n) {
-  // Return a random number from in [0, n[
-  return Math.floor(Math.random()*n);
-}
-
-function randomMember(arr) {
-  // Return a random member of the array
-  return arr[randomInt(arr.length)]
-}
-
-
-names = [];
-
-
-document.getElementById('button').addEventListener('click', (event) => {
-  let element_list = document.getElementById('list');
-  let new_li = document.createElement('li');
-  new_li.innerText = getNumberOrString(document.getElementById('text').value);
-  names.unshift(getNumberOrString(document.getElementById('text').value));
-
-  element_list.appendChild(new_li);
 
 });
 
-document.getElementById('button2').addEventListener('click', (event) => {
-  let element_list2 = document.getElementById('list2');
-  let new_li2 = document.createElement('li');
-  names.forEach((item) => {
-    new_li2.innerText = randomMember(names);
-  });
-
-  element_list2.appendChild(new_li2);
+document.getElementById('previous').addEventListener('click', (event) => {
+  let element_album3 = document.getElementById('album');
+  element_album3.setAttribute("src", Albums[0]);
+  Albums.unshift(Albums.pop());
+  if (!Albums.length) {
+    setArrayValues();
+  }
 
 });
